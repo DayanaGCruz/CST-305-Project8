@@ -5,7 +5,9 @@
 # Project 8: Numerical Integration
 
 # Import necessary libraries
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.use('TkAgg')
 import numpy as np
 import time 
 
@@ -42,10 +44,13 @@ def Riemann(a,b,func,n):
 	# Midpoint with granularity n = 1000 is the best approximate of actual area as n approaches infinity
 
 	# Plot and label rectangles with left-hand end points
-	plt.figure(1,figsize = (8,18))
+#----------------------------------------------------------------
+	# Figure window header title shows the current problem the Figure corresponds to, set by current var
+#----------------------------------------------------------------
+	plt.figure(current,figsize = (8,18))
 	plt.subplot(3,2,1)
 	plt.text(3, 0.7, 'Approx. Area = {}'.format(lnarea))
-	plt.title('Left-Hand Endpoint Reimann Sum with {} rectangles'.format(n))
+	plt.title('Left-Hand Endpoint Reimann Sum with {} rectangles: Approx. Area = {}'.format(n, lnarea))
 	plt.xlabel('x')
 	plt.ylabel('f(x)')
 	plt.plot(xs, ys, color = 'pink', marker = 'o', markersize = ms, markerfacecolor = '#ff5ba3')
@@ -59,7 +64,7 @@ def Riemann(a,b,func,n):
 	plt.text(3, 0.7, 'Approx. Area = {}'.format(rnarea))
 	plt.plot(xs, ys,  color = 'pink', marker = 'o', markersize = ms, markerfacecolor = '#ff5ba3')
 	plt.bar(rnxs, rnh, width = -xi, alpha = 0.1, align = 'edge', color = 'green') # Negative xi, so that the bar orients left
-	plt.title('Right-Hand Endpoint Reimann Sum with {} rectangles'.format(n))
+	plt.title('Right-Hand Endpoint Reimann Sum with {} rectangles: Approx. Area = {}'.format(n, rnarea))
 	plt.xlabel('x')
 	plt.ylabel('f(x)')
 	plt.grid(True)
@@ -69,7 +74,7 @@ def Riemann(a,b,func,n):
 	# Plot and label rectangles with midpoints
 	plt.subplot(3,2,5)
 	plt.text(3, 0.7, 'Approx. Area = {}'.format(mnarea))
-	plt.title('Midpoint Reimann Sum with {} rectangles'.format(n))
+	plt.title('Midpoint Reimann Sum with {} rectangles: Approx. Area = {}'.format(n, mnarea))
 	plt.xlabel('x')
 	plt.ylabel('f(x)')
 	plt.plot(xs,ys, color = 'pink', marker = 'o', markersize = ms, markerfacecolor = '#ff5ba3')
@@ -81,6 +86,7 @@ def Riemann(a,b,func,n):
 
 	plt.show()
 
+current = 'Part 1: a.'
 # Riemann(a,b,func,n)
 # a - Lower Limit of Interval
 # b - Upper Limit of Interval
@@ -100,7 +106,7 @@ def f(x):
 Riemann(-np.pi,np.pi,f,4)
 Riemann(-np.pi,np.pi,f,200)
 Riemann(-np.pi,np.pi,f,1000)
-
+current = 'Part 1: b.'
 print('Part 1: b.')
 #---------------
 # b.
@@ -109,7 +115,7 @@ print('Part 1: b.')
 def k(x):
 	return 3*x + 2 * (x**2)
 Riemann(0,1, k, 1000)
-
+current = 'Part 1: c1.'
 print('Part 1: c1.')
 #---------------
 # c1. 
@@ -118,7 +124,7 @@ def g(x):
 	return np.log(x)
 
 Riemann(1, np.e, g, 1000)
-
+current = 'Part 1: c2.'
 print('Part 1: c2.')
 #---------------
 # c2. 
@@ -132,11 +138,17 @@ Riemann(-1, 0, j, 1000)
 #------------------------------------------------------------------------------------
 # Part 2 
 #------------------------------------------------------------------------------------
+current = 'Part 2:'
 print('Part 2:')
 # Mean Download rate noted over the interval of [0,30] minutes
 def R(t):
 	return 34.9*t
 
+
+# Call Riemann Sum function to Calculate Riemann Sum & Total Amount of Data Compressed in the Interval 
+# Minutes: [0, 30]
+Riemann(0,30, R,1000)
+ 
 
 # Call Riemann Sum function to Calculate Riemann Sum & Total Amount of Data Compressed in the Interval 
 # Minutes: [0, 30]
