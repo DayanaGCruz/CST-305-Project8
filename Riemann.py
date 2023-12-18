@@ -149,8 +149,4 @@ def R(t):
 # Minutes: [0, 30]
 Riemann(0,30, R,1000)
  
-
-# Call Riemann Sum function to Calculate Riemann Sum & Total Amount of Data Compressed in the Interval 
-# Minutes: [0, 30]
-Riemann(0,30, R,1000)
  
